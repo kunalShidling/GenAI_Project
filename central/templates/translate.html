@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kannada to Python Code Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Kannada Text to Python Code Generator</h2>
+
+  <div class="container">
+    <!-- Left Side -->
+    <div class="left-side">
+      <!-- Kannada Input -->
+      <div class="section box">
+        <label for="kannadaInput">Type in Kannada:</label>
+        <div class="textarea-container">
+          <textarea id="kannadaInput" placeholder="ಇಲ್ಲಿ ಕನ್ನಡದಲ್ಲಿ ಬರೆಯಿರಿ..."></textarea>
+          <span class="keyboard-icon" onclick="toggleKeyboard()">⌨️</span>
+          <span class="mic-icon" onclick="startRecording()">🎤</span>
+        </div>
+      </div>
+
+      <!-- Virtual Keyboard -->
+      <div id="keyboard" class="keyboard hidden"></div>
+
+      <!-- Process Button -->
+      <button onclick="processKannadaToCode('english')" class="process-button">
+        Process Kannada to Python with English Explanation
+      </button>
+
+      <!-- English Translation Output -->
+      <div class="section box">
+        <label for="englishOutput">Translated English Text:</label>
+        <textarea id="englishOutput" readonly placeholder="English translation will appear here..."></textarea>
+      </div>
+
+      <!-- Python Code Output -->
+      <div class="section box">
+        <label for="output">Generated Python Code:</label>
+        <textarea id="output" readonly placeholder="Generated Python code will appear here..."></textarea>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Right Side -->
+    <div class="right-side">
+      <!-- Python Runner (Pyodide) — replaces the shut-down Trinket embed -->
+      <div class="section trinket-container box">
+        <h3>Try Python Code Below:</h3>
+        <div id="pyodideStatus" class="pyodide-status">Loading Python runtime...</div>
+        <textarea id="codeRunner" placeholder="Python code to run will appear here..."></textarea>
+        <button id="runBtn" onclick="runPythonCode()" class="process-button" disabled>▶ Run Code</button>
+        <pre id="runOutput" class="run-output"></pre>
+      </div>
+
+      <!-- Explanation Output -->
+      <div class="section explanation-section box">
+        <label for="explanation">Explanation of the Python Code:</label>
+        <textarea id="explanation" readonly placeholder="Explanation of the Python code will appear here..."></textarea>
+        <div class="explanation-buttons">
+          <button onclick="explainCode()">Explain in English</button>
+          <button onclick="explainCodeKannada()">Explain in Kannada</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pyodide must load BEFORE script.js, since script.js initializes it on page load -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}?v=2"></script>
+</body>
+</html>
